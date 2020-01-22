@@ -4,8 +4,10 @@ import Loading from '../../components/Loading';
 
 import QuestionStatusCard from '../../components/QuestionStatusCard';
 import Content from '../../components/Content';
+import QuestionText from '../../components/QuestionText';
 
 import './Question.scss';
+import AnswerButton from '../../components/AnswerButton/AnswerButton';
 
 const Home = ({ question }) => {
   if (question.fetching) {
@@ -19,7 +21,15 @@ const Home = ({ question }) => {
   return (
     <div className="question">
       <QuestionStatusCard />
-      <Content>1</Content>
+      <Content>
+        <QuestionText>
+          What was Bruce Campbell's iconic one-liner after getting a chainsaw hand in Evil Dead 2?
+        </QuestionText>
+        <AnswerButton choice="a">Test</AnswerButton>
+        <AnswerButton choice="b">Test</AnswerButton>
+        <AnswerButton choice="c">Test</AnswerButton>
+        <AnswerButton choice="d">Test</AnswerButton>
+      </Content>
     </div>
   );
 };

@@ -1,0 +1,25 @@
+@import '../../styles/styles';
+
+.answer-button {
+  height: 60px;
+  width: 400px;
+  background-color: $opacity-color;
+  line-height: 60px;
+  font-size: 14px;
+  text-align: center;
+  border: none;
+  display: flex;
+  border-left: 3px solid #fff;
+  margin: 10px;
+
+  .choice {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .text {
+    font-weight: 500;
+  }
+  
+  &:focus { outline: none; }
+}
