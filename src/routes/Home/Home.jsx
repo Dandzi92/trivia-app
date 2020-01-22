@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import './Home.scss';
+
 export default function Home() {
   return (
-    <div>
-      <h1>Home</h1>
+    <div className="container">
+      <div className="logo">a</div>
+      <div className="slogan">A trivia game</div>
       <Link to="/question">Go to question</Link>
     </div>
   );

@@ -1,0 +1,21 @@
+@import './styles/normalize';
+@import './styles/styles';
+
+@include font-face('Product Sans', 'ProductSans', 'ProductSans-Regular');
+@include font-face('Product Sans', 'ProductSans', 'ProductSans-Light', 100);
+@include font-face('Product Sans', 'ProductSans', 'ProductSans-Medium', 500);
+@include font-face('Product Sans', 'ProductSans', 'ProductSans-Bold', 'bold');
+
+@include font-face-modern('Product Sans', 'ProductSans', 'ProductSans-Regular');
+@include font-face-modern('Product Sans', 'ProductSans', 'ProductSans-Light', 100);
+@include font-face-modern('Product Sans', 'ProductSans', 'ProductSans-Medium', 500);
+@include font-face-modern('Product Sans', 'ProductSans', 'ProductSans-Bold', bold);
+
+* {
+  font-family: $font-family-primary;
+  font-weight: $font-family-weight-primary;
+}
+
+body > #root > div {
+  height: 100vh;
+}
