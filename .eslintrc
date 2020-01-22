@@ -24,5 +24,8 @@
         "prettier/prettier": [
             "error"
         ]
+    },
+    "globals": {
+        "fetch": false
     }
 }
