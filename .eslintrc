@@ -23,7 +23,8 @@
         ],
         "prettier/prettier": [
             "error"
-        ]
+        ],
+        "react/prop-types": 0
     },
     "globals": {
         "fetch": false

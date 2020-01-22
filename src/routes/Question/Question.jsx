@@ -1,11 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default function Home() {
+import './Question.scss';
+
+const Home = ({ question }) => {
+  console.log(question);
+  if (question.fetching) {
+    return <div className="container">Loading</div>;
+  }
+
   return (
-    <>
-      <h1>Question</h1>
-      <Link to="/">Go to home</Link>
-    </>
+    <div className="container">
+      <div className="logo" />
+      <div className="slogan">A trivia game</div>
+      <Link to="/">Home</Link>
+    </div>
   );
-}
+};
+
+const mapStateToProps = state => {
+  return {
+    question: state.question,
+  };
+};
+
+export default connect(mapStateToProps)(Home);

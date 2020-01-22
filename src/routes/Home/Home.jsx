@@ -1,30 +1,38 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { generateQuestions } from '../../store/actions';
 import Button from '../../components/Button';
 
 import './Home.scss';
 
-export default function Home() {
+const Home = ({ dispatch }) => {
   const history = useHistory();
-  const generateQuiz = async () => {
-    const response = await fetch(
-      'https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple',
-    );
-    const data = await response.json();
+
+  const buttonOnClick = async () => {
+    dispatch(generateQuestions('easy'));
     history.push('/question');
-    return data;
   };
+
   return (
     <div className="container">
       <div className="logo" />
       <div className="slogan">A trivia game</div>
       <Button
         onClick={() => {
-          generateQuiz();
+          buttonOnClick();
         }}
       >
         GET STARTED
       </Button>
     </div>
   );
-}
+};
+
+const mapStateToProps = state => {
+  return {
+    question: state.question,
+  };
+};
+
+export default connect(mapStateToProps)(Home);

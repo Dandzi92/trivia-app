@@ -1,0 +1,10 @@
+@import '../../styles/styles';
+
+.container {
+  background-color: $color-primary;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
