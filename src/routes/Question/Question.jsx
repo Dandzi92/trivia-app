@@ -1,20 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Loading from '../../components/Loading';
+
+import QuestionStatusCard from '../../components/QuestionStatusCard';
+import Content from '../../components/Content';
 
 import './Question.scss';
 
 const Home = ({ question }) => {
-  console.log(question);
   if (question.fetching) {
-    return <div className="container">Loading</div>;
+    return (
+      <div className="question-loading">
+        <Loading />
+      </div>
+    );
   }
 
   return (
-    <div className="container">
-      <div className="logo" />
-      <div className="slogan">A trivia game</div>
-      <Link to="/">Home</Link>
+    <div className="question">
+      <QuestionStatusCard />
+      <Content>1</Content>
     </div>
   );
 };

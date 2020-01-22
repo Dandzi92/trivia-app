@@ -1,25 +1,25 @@
 @import '../../styles/styles';
 
-.container {
+.home {
   background-color: $color-primary;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
 
-.logo {
-  background-image: url('../../img/react-logo.png');
-  background-size: cover;
-  width: 100px;
-  height: 100px;
-  margin-bottom: 10px;
-}
+  .logo {
+    background-image: url('../../img/react-logo.png');
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+  }
 
-.slogan {
-  color: $white-color;
-  font-weight: 100;
-  font-size: 18px;
-  margin-bottom: 100px;
+  .slogan {
+    color: $white-color;
+    font-weight: 100;
+    font-size: 18px;
+    margin-bottom: 100px;
+  }
 }

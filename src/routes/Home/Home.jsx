@@ -15,7 +15,7 @@ const Home = ({ dispatch }) => {
   };
 
   return (
-    <div className="container">
+    <div className="home">
       <div className="logo" />
       <div className="slogan">A trivia game</div>
       <Button

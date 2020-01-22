@@ -1,6 +1,13 @@
 @import '../../styles/styles';
 
-.container {
+.question {
+  background-color: $color-primary;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.question-loading {
   background-color: $color-primary;
   height: 100%;
   display: flex;
