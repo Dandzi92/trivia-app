@@ -16,6 +16,10 @@
   font-weight: $font-family-weight-primary;
 }
 
+a {
+  text-decoration: none;
+}
+
 body > #root > div {
   height: 100vh;
 }
