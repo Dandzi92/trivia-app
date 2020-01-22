@@ -1,4 +1,10 @@
-const defaultState = { fetching: false, fetched: false, payload: {} };
+const defaultState = {
+  fetching: false,
+  fetched: false,
+  currentIndex: 0,
+  questions: {},
+  currentQuestion: {},
+};
 
 const question = (state = defaultState, action) => {
   switch (action.type) {
@@ -13,7 +19,8 @@ const question = (state = defaultState, action) => {
         fetching: false,
         fetched: true,
         error: null,
-        payload: action.payload,
+        questions: action.questions,
+        currentQuestion: action.questions.results[0],
       };
     case 'FETCH_QUESTIONS_ERROR':
       return {
@@ -21,6 +28,12 @@ const question = (state = defaultState, action) => {
         fetching: false,
         fetched: false,
         error: action.error,
+      };
+    case 'QUESTIONS_CHANGE':
+      return {
+        ...state,
+        currentIndex: state.currentIndex + 1,
+        currentQuestion: action.questions.results[state.currentIndex + 1],
       };
     default:
       return state;

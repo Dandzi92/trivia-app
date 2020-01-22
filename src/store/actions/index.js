@@ -8,14 +8,18 @@ export const fetchQuestionsStarted = () => ({
   type: 'FETCH_QUESTIONS_STARTED',
 });
 
-export const fetchQuestionsLoaded = payload => ({
+export const fetchQuestionsLoaded = questions => ({
   type: 'FETCH_QUESTIONS_LOADED',
-  payload,
+  questions,
 });
 
 export const fetchQuestionsError = error => ({
   type: 'FETCH_QUESTIONS_ERROR',
   error,
+});
+
+export const QuestionChange = () => ({
+  type: 'QUESTIONS_CHANGE',
 });
 
 export const generateQuestions = difficulty => dispatch => {
