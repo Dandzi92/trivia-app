@@ -8,9 +8,9 @@ import QuestionStatusCard from '../../components/QuestionStatusCard';
 import Content from '../../components/Content';
 import QuestionText from '../../components/QuestionText';
 import AnswerButton from '../../components/AnswerButton/AnswerButton';
+import Button from '../../components/Button/Button';
 
 import './Question.scss';
-import Button from '../../components/Button/Button';
 
 class Question extends Component {
   constructor(props) {
@@ -96,6 +96,7 @@ class Question extends Component {
       this.setState({ answers: answersArray });
       console.log(currentQuestion.correct_answer);
     }
+
     return (
       <div className="question">
         <QuestionStatusCard
@@ -104,7 +105,7 @@ class Question extends Component {
           questionIndex={question.currentIndex}
           remainingTime={remainingTime}
         />
-        <div className="jokers">
+        <div className="jokers-wrapper">
           <Button variant="circle" onClick={this.useJoker} disabled={question.jokerCount <= 0}>
             50%
           </Button>
