@@ -5,6 +5,7 @@ import {
   QUESTION_ANSWERED_CORRECTLY,
   QUESTIONS_CHANGED,
   GAME_OVER,
+  JOKER_USED,
 } from '../constansts/ActionTypes';
 
 const defaultState = {
@@ -15,6 +16,8 @@ const defaultState = {
   currentQuestion: {},
   points: 0,
   lastEarnedPoint: 0,
+  jokerCount: 1,
+  jokerUsed: false,
 };
 
 const question = (state = defaultState, action) => {
@@ -52,6 +55,13 @@ const question = (state = defaultState, action) => {
         ...state,
         currentIndex: state.currentIndex + 1,
         currentQuestion: state.questions.results[state.currentIndex + 1],
+        jokerUsed: false,
+      };
+    case JOKER_USED:
+      return {
+        ...state,
+        jokerCount: state.jokerCount - 1,
+        jokerUsed: true,
       };
     case GAME_OVER:
       return {

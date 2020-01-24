@@ -11,6 +11,8 @@
   
   &:focus { outline: none; }
 
+  &:disabled { background-color: $disabled-color; }
+
   &-default {
     height: 40px;
     width: 200px;
@@ -19,5 +21,11 @@
   &-big {
     width: 400px;
     height: 60px;
+  }
+
+  &-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
   }
 }

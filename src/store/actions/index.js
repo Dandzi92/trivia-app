@@ -5,6 +5,7 @@ import {
   QUESTION_ANSWERED_CORRECTLY,
   QUESTIONS_CHANGED,
   GAME_OVER,
+  JOKER_USED,
 } from '../constansts/ActionTypes';
 
 const axios = require('axios').default;
@@ -57,4 +58,8 @@ export const questionChanged = () => ({
 
 export const gameOver = () => ({
   type: GAME_OVER,
+});
+
+export const jokerUsed = () => ({
+  type: JOKER_USED,
 });

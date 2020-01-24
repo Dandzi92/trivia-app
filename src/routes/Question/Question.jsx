@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import { questionAnsweredCorrectly } from '../../store/actions';
+import { questionAnsweredCorrectly, jokerUsed } from '../../store/actions';
 
 import Loading from '../../components/Loading';
 import QuestionStatusCard from '../../components/QuestionStatusCard';
@@ -10,6 +10,7 @@ import QuestionText from '../../components/QuestionText';
 import AnswerButton from '../../components/AnswerButton/AnswerButton';
 
 import './Question.scss';
+import Button from '../../components/Button/Button';
 
 class Question extends Component {
   constructor(props) {
@@ -47,6 +48,14 @@ class Question extends Component {
     }
   };
 
+  useJoker = () => {
+    const { dispatch, question } = this.props;
+    const { jokerCount } = question;
+    if (jokerCount > 0) {
+      dispatch(jokerUsed());
+    }
+  };
+
   onClick = answer => {
     const { dispatch, question, history } = this.props;
     const { remainingTime } = this.state;
@@ -67,6 +76,7 @@ class Question extends Component {
     const { answers, remainingTime } = this.state;
     const { currentQuestion } = question;
     const choices = ['a', 'b', 'c', 'd'];
+    let disableRemaing = 2;
 
     if (question.fetching) {
       return (
@@ -86,7 +96,6 @@ class Question extends Component {
       this.setState({ answers: answersArray });
       console.log(currentQuestion.correct_answer);
     }
-
     return (
       <div className="question">
         <QuestionStatusCard
@@ -95,12 +104,23 @@ class Question extends Component {
           questionIndex={question.currentIndex}
           remainingTime={remainingTime}
         />
+        <div className="jokers">
+          <Button variant="circle" onClick={this.useJoker} disabled={question.jokerCount <= 0}>
+            50%
+          </Button>
+        </div>
         <Content>
           <QuestionText>{currentQuestion.question}</QuestionText>
           {answers &&
             answers.map((answer, i) => {
+              let disabled = false;
+              if (question.jokerUsed) {
+                disabled = answer !== currentQuestion.correct_answer && disableRemaing > 0;
+                disableRemaing = disabled ? disableRemaing - 1 : disableRemaing;
+              }
               return (
                 <AnswerButton
+                  disabled={disabled}
                   data-answer={answer}
                   onClick={this.onClick}
                   // eslint-disable-next-line react/no-array-index-key

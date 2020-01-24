@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 import './Button.scss';
 
-export default function Button({ children, variant, onClick }) {
+export default function Button({ children, variant, onClick, disabled }) {
   const className = `button button-${variant}`;
   return (
-    <button type="button" onClick={onClick} className={className}>
+    <button type="button" onClick={onClick} className={className} disabled={disabled}>
       {children}
     </button>
   );

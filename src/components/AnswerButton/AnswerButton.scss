@@ -22,6 +22,8 @@
   .text {
     font-weight: 100;
   }
+
+  &:disabled { background-color: $disabled-color; }
   
   &:focus { outline: none; }
 }
