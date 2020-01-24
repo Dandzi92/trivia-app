@@ -10,14 +10,18 @@ const QuestionStatusCard = ({ questionCount, questionIndex, points, remainingTim
         <div>Question</div>
         <div>{`${questionIndex + 1} / ${questionCount}`}</div>
       </div>
-      <div className="wrapper">
-        <div>Points</div>
-        <div>{points}</div>
-      </div>
-      <div className="wrapper">
-        <div>Remaining Time</div>
-        <div>{remainingTime}</div>
-      </div>
+      {Number.isInteger(points) && (
+        <div className="wrapper">
+          <div>Points</div>
+          <div>{points}</div>
+        </div>
+      )}
+      {Number.isInteger(remainingTime) && (
+        <div className="wrapper">
+          <div>Remaining Time</div>
+          <div>{remainingTime}</div>
+        </div>
+      )}
     </div>
   );
 };
@@ -32,8 +36,8 @@ QuestionStatusCard.propTypes = {
 QuestionStatusCard.defaultProps = {
   questionCount: 10,
   questionIndex: 0,
-  points: 0,
-  remainingTime: 0,
+  points: null,
+  remainingTime: null,
 };
 
 export default QuestionStatusCard;

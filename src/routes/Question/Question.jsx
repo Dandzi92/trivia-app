@@ -20,8 +20,11 @@ class Question extends Component {
     };
   }
 
-  componentDidMount() {
-    this.timer = setInterval(this.interval, 1000);
+  componentDidUpdate() {
+    const { answers, remainingTime } = this.state;
+    if (answers && remainingTime === 15) {
+      this.timer = setInterval(this.interval, 1000);
+    }
   }
 
   componentWillUnmount() {
@@ -33,7 +36,7 @@ class Question extends Component {
     const { history } = this.props;
     this.setState({ remainingTime: remainingTime - 1 });
     if (remainingTime === 0) {
-      history.push('/wrong');
+      history.push('/timesup');
     }
   };
 

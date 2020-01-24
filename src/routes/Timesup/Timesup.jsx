@@ -7,9 +7,9 @@ import QuestionStatusCard from '../../components/QuestionStatusCard';
 import Content from '../../components/Content';
 import Button from '../../components/Button/Button';
 
-import './Wrong.scss';
+import './Timesup.scss';
 
-const Wrong = ({ dispatch, question }) => {
+const Timesup = ({ dispatch, question }) => {
   const history = useHistory();
   const onClick = () => {
     dispatch(gameOver());
@@ -17,16 +17,16 @@ const Wrong = ({ dispatch, question }) => {
   };
 
   return (
-    <div className="wrong-page">
+    <div className="timesup-page">
       <QuestionStatusCard
         questionCount={question.questionCount}
         questionIndex={question.currentIndex}
       />
       <Content>
-        <div className="wrong-icon" />
-        <div className="status">Wrong</div>
+        <div className="time-icon" />
+        <div className="status">Time&apos;s up</div>
         <div className="description">
-          <span>You failed.</span>
+          <span>You are late, time’s up.</span>
           <span>Total: {question.points} points</span>
         </div>
         <Button onClick={onClick} variant="big">
@@ -43,4 +43,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Wrong);
+export default connect(mapStateToProps)(Timesup);

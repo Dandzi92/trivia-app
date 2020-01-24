@@ -19,7 +19,6 @@ const Success = ({ dispatch, question }) => {
   return (
     <div className="success-page">
       <QuestionStatusCard
-        points={question.points}
         questionCount={question.questionCount}
         questionIndex={question.currentIndex}
       />
