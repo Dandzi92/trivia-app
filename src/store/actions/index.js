@@ -18,10 +18,6 @@ export const fetchQuestionsError = error => ({
   error,
 });
 
-export const QuestionChange = () => ({
-  type: 'QUESTIONS_CHANGE',
-});
-
 export const generateQuestions = difficulty => dispatch => {
   dispatch(fetchQuestionsStarted());
   http
@@ -37,3 +33,11 @@ export const generateQuestions = difficulty => dispatch => {
       dispatch(fetchQuestionsError(error.toString()));
     });
 };
+
+export const questionAnsweredCorrectly = () => ({
+  type: 'QUESTION_ANSWERED_CORRECTLY',
+});
+
+export const questionChanged = () => ({
+  type: 'QUESTIONS_CHANGED',
+});

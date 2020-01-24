@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { questionAnsweredCorrectly } from '../../store/actions';
 
 import Loading from '../../components/Loading';
 import QuestionStatusCard from '../../components/QuestionStatusCard';
@@ -10,7 +11,7 @@ import AnswerButton from '../../components/AnswerButton/AnswerButton';
 
 import './Question.scss';
 
-const Home = ({ question }) => {
+const Home = ({ dispatch, question }) => {
   const history = useHistory();
   if (question.fetching) {
     return (
@@ -31,6 +32,7 @@ const Home = ({ question }) => {
     const correctAnswer = currentQuestion.correct_answer.toString();
     const userAnswer = event.target.dataset.answer;
     if (userAnswer === correctAnswer) {
+      dispatch(questionAnsweredCorrectly());
       console.log('doğru');
     } else {
       console.log('yanlış');

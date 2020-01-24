@@ -4,6 +4,7 @@ const defaultState = {
   currentIndex: 0,
   questions: {},
   currentQuestion: {},
+  points: 0,
 };
 
 const question = (state = defaultState, action) => {
@@ -29,11 +30,16 @@ const question = (state = defaultState, action) => {
         fetched: false,
         error: action.error,
       };
-    case 'QUESTIONS_CHANGE':
+    case 'QUESTION_ANSWERED_CORRECTLY':
+      return {
+        ...state,
+        points: state.points + 100,
+      };
+    case 'QUESTIONS_CHANGED':
       return {
         ...state,
         currentIndex: state.currentIndex + 1,
-        currentQuestion: action.questions.results[state.currentIndex + 1],
+        currentQuestion: state.questions.results[state.currentIndex + 1],
       };
     default:
       return state;
