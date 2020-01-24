@@ -22,8 +22,13 @@ const Success = ({ dispatch, question }) => {
   };
 
   const onClick = () => {
-    dispatch(questionChanged());
-    history.push('/question');
+    const { currentIndex, questionCount } = question;
+    if (currentIndex + 1 === questionCount) {
+      history.push('/result');
+    } else {
+      dispatch(questionChanged());
+      history.push('/question');
+    }
   };
 
   return (

@@ -6,6 +6,7 @@ import Question from './Question';
 import Success from './Success';
 import Wrong from './Wrong';
 import Timesup from './Timesup';
+import Result from './Result';
 
 const Routes = () => (
   <Switch>
@@ -14,6 +15,7 @@ const Routes = () => (
     <Route path="/success" exact component={Success} />
     <Route path="/wrong" exact component={Wrong} />
     <Route path="/timesup" exact component={Timesup} />
+    <Route path="/result" exact component={Result} />
   </Switch>
 );
 

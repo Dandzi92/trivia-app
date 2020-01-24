@@ -20,7 +20,7 @@ export const fetchQuestionsError = error => ({
 
 export const generateQuestions = (category, difficulty) => dispatch => {
   dispatch(fetchQuestionsStarted());
-  let URL = '/api.php?amount=10&type=multiple';
+  let URL = '/api.php?amount=3&type=multiple';
   URL = category !== 'any' ? `${URL}&category=${category}` : URL;
   URL = difficulty !== 'any' ? `${URL}&difficulty=${difficulty}` : URL;
   http

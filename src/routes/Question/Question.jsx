@@ -53,7 +53,6 @@ class Question extends Component {
     const { currentQuestion } = question;
     const correctAnswer = currentQuestion.correct_answer;
     const userAnswer = answer;
-    console.log(correctAnswer, userAnswer);
     if (userAnswer === correctAnswer) {
       const earnedPoint = Math.round(100 / (15 / remainingTime));
       dispatch(questionAnsweredCorrectly(earnedPoint));
