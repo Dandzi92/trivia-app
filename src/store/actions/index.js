@@ -1,3 +1,12 @@
+import {
+  FETCH_QUESTIONS_ERROR,
+  FETCH_QUESTIONS_STARTED,
+  FETCH_QUESTIONS_LOADED,
+  QUESTION_ANSWERED_CORRECTLY,
+  QUESTIONS_CHANGED,
+  GAME_OVER,
+} from '../constansts/ActionTypes';
+
 const axios = require('axios').default;
 
 const http = axios.create({
@@ -5,22 +14,22 @@ const http = axios.create({
 });
 
 export const fetchQuestionsStarted = () => ({
-  type: 'FETCH_QUESTIONS_STARTED',
+  type: FETCH_QUESTIONS_STARTED,
 });
 
 export const fetchQuestionsLoaded = questions => ({
-  type: 'FETCH_QUESTIONS_LOADED',
+  type: FETCH_QUESTIONS_LOADED,
   questions,
 });
 
 export const fetchQuestionsError = error => ({
-  type: 'FETCH_QUESTIONS_ERROR',
+  type: FETCH_QUESTIONS_ERROR,
   error,
 });
 
 export const generateQuestions = (category, difficulty) => dispatch => {
   dispatch(fetchQuestionsStarted());
-  let URL = '/api.php?amount=3&type=multiple';
+  let URL = '/api.php?amount=10&type=multiple';
   URL = category !== 'any' ? `${URL}&category=${category}` : URL;
   URL = difficulty !== 'any' ? `${URL}&difficulty=${difficulty}` : URL;
   http
@@ -38,14 +47,14 @@ export const generateQuestions = (category, difficulty) => dispatch => {
 };
 
 export const questionAnsweredCorrectly = point => ({
-  type: 'QUESTION_ANSWERED_CORRECTLY',
+  type: QUESTION_ANSWERED_CORRECTLY,
   point,
 });
 
 export const questionChanged = () => ({
-  type: 'QUESTIONS_CHANGED',
+  type: QUESTIONS_CHANGED,
 });
 
 export const gameOver = () => ({
-  type: 'GAME_OVER',
+  type: GAME_OVER,
 });

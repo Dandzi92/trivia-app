@@ -1,3 +1,12 @@
+import {
+  FETCH_QUESTIONS_STARTED,
+  FETCH_QUESTIONS_LOADED,
+  FETCH_QUESTIONS_ERROR,
+  QUESTION_ANSWERED_CORRECTLY,
+  QUESTIONS_CHANGED,
+  GAME_OVER,
+} from '../constansts/ActionTypes';
+
 const defaultState = {
   fetching: false,
   fetched: false,
@@ -10,12 +19,12 @@ const defaultState = {
 
 const question = (state = defaultState, action) => {
   switch (action.type) {
-    case 'FETCH_QUESTIONS_STARTED':
+    case FETCH_QUESTIONS_STARTED:
       return {
         ...state,
         fetching: true,
       };
-    case 'FETCH_QUESTIONS_LOADED':
+    case FETCH_QUESTIONS_LOADED:
       return {
         ...state,
         fetching: false,
@@ -25,26 +34,26 @@ const question = (state = defaultState, action) => {
         currentQuestion: action.questions.results[0],
         questionCount: action.questions.results.length,
       };
-    case 'FETCH_QUESTIONS_ERROR':
+    case FETCH_QUESTIONS_ERROR:
       return {
         ...state,
         fetching: false,
         fetched: false,
         error: action.error,
       };
-    case 'QUESTION_ANSWERED_CORRECTLY':
+    case QUESTION_ANSWERED_CORRECTLY:
       return {
         ...state,
         points: state.points + action.point,
         lastEarnedPoint: action.point,
       };
-    case 'QUESTIONS_CHANGED':
+    case QUESTIONS_CHANGED:
       return {
         ...state,
         currentIndex: state.currentIndex + 1,
         currentQuestion: state.questions.results[state.currentIndex + 1],
       };
-    case 'GAME_OVER':
+    case GAME_OVER:
       return {
         ...defaultState,
       };
