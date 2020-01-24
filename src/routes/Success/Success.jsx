@@ -1,7 +1,11 @@
 import React from 'react';
+import Lottie from 'react-lottie';
+
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { questionChanged } from '../../store/actions';
+
+import * as animationData from '../../animations/correct.json';
 
 import QuestionStatusCard from '../../components/QuestionStatusCard';
 import Content from '../../components/Content';
@@ -11,6 +15,12 @@ import './Success.scss';
 
 const Success = ({ dispatch, question }) => {
   const history = useHistory();
+
+  const animationOptions = {
+    loop: false,
+    animationData: animationData.default,
+  };
+
   const onClick = () => {
     dispatch(questionChanged());
     history.push('/question');
@@ -23,7 +33,9 @@ const Success = ({ dispatch, question }) => {
         questionIndex={question.currentIndex}
       />
       <Content>
-        <div className="check-icon" />
+        <div className="check-icon">
+          <Lottie options={animationOptions} />
+        </div>
         <div className="status">Correct</div>
         <div className="description">
           <span>You have earned {question.lastEarnedPoint} points</span>

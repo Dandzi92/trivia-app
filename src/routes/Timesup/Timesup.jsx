@@ -1,7 +1,11 @@
 import React from 'react';
+import Lottie from 'react-lottie';
+
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { gameOver } from '../../store/actions';
+
+import * as animationData from '../../animations/timesup.json';
 
 import QuestionStatusCard from '../../components/QuestionStatusCard';
 import Content from '../../components/Content';
@@ -11,6 +15,12 @@ import './Timesup.scss';
 
 const Timesup = ({ dispatch, question }) => {
   const history = useHistory();
+
+  const animationOptions = {
+    loop: false,
+    animationData: animationData.default,
+  };
+
   const onClick = () => {
     dispatch(gameOver());
     history.push('/');
@@ -23,7 +33,9 @@ const Timesup = ({ dispatch, question }) => {
         questionIndex={question.currentIndex}
       />
       <Content>
-        <div className="time-icon" />
+        <div className="time-icon">
+          <Lottie options={animationOptions} />
+        </div>
         <div className="status">Time&apos;s up</div>
         <div className="description">
           <span>You are late, time’s up.</span>

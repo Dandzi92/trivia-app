@@ -1,7 +1,10 @@
 import React from 'react';
+import Lottie from 'react-lottie';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { gameOver } from '../../store/actions';
+
+import * as animationData from '../../animations/wrong.json';
 
 import QuestionStatusCard from '../../components/QuestionStatusCard';
 import Content from '../../components/Content';
@@ -11,6 +14,12 @@ import './Wrong.scss';
 
 const Wrong = ({ dispatch, question }) => {
   const history = useHistory();
+
+  const animationOptions = {
+    loop: false,
+    animationData: animationData.default,
+  };
+
   const onClick = () => {
     dispatch(gameOver());
     history.push('/');
@@ -23,7 +32,9 @@ const Wrong = ({ dispatch, question }) => {
         questionIndex={question.currentIndex}
       />
       <Content>
-        <div className="wrong-icon" />
+        <div className="wrong-icon">
+          <Lottie options={animationOptions} />
+        </div>
         <div className="status">Wrong</div>
         <div className="description">
           <span>You failed.</span>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { connect } from 'react-redux';
 import { questionAnsweredCorrectly } from '../../store/actions';
 
@@ -22,6 +23,12 @@ class Question extends Component {
 
   componentDidUpdate() {
     const { answers, remainingTime } = this.state;
+    const { history, question } = this.props;
+    const { error } = question;
+    if (error) {
+      console.log(error);
+      history.push('/');
+    }
     if (answers && remainingTime === 15) {
       this.timer = setInterval(this.interval, 1000);
     }
@@ -40,12 +47,13 @@ class Question extends Component {
     }
   };
 
-  onClick = event => {
+  onClick = answer => {
     const { dispatch, question, history } = this.props;
     const { remainingTime } = this.state;
     const { currentQuestion } = question;
-    const correctAnswer = currentQuestion.correct_answer.toString();
-    const userAnswer = event.target.dataset.answer;
+    const correctAnswer = currentQuestion.correct_answer;
+    const userAnswer = answer;
+    console.log(correctAnswer, userAnswer);
     if (userAnswer === correctAnswer) {
       const earnedPoint = Math.round(100 / (15 / remainingTime));
       dispatch(questionAnsweredCorrectly(earnedPoint));
@@ -94,7 +102,7 @@ class Question extends Component {
             answers.map((answer, i) => {
               return (
                 <AnswerButton
-                  data-answer={answers}
+                  data-answer={answer}
                   onClick={this.onClick}
                   // eslint-disable-next-line react/no-array-index-key
                   key={i}

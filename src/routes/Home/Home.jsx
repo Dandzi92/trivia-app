@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
+import Lottie from 'react-lottie';
+
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { generateQuestions } from '../../store/actions';
+
+import * as animationData from '../../animations/logo.json';
+
 import Button from '../../components/Button';
 
 import './Home.scss';
@@ -11,7 +16,18 @@ const Home = ({ dispatch }) => {
   const [category, setCategory] = useState('any');
   const [difficultly, setDifficultly] = useState('any');
 
+  const animationOptions = {
+    loop: false,
+    animationData: animationData.default,
+  };
+
   const buttonOnClick = () => {
+    /**
+     * Bazı kategorilerin zorluk seviyelerinde bug bulunuyor.
+     * Category: Art
+     * Difficultly: Hard
+     * https://opentdb.com/api.php?amount=10&category=25&difficulty=hard
+     */
     dispatch(generateQuestions(category, difficultly));
     history.push('/question');
   };
@@ -25,7 +41,9 @@ const Home = ({ dispatch }) => {
 
   return (
     <div className="home">
-      <div className="logo" />
+      <div className="logo">
+        <Lottie options={animationOptions} />
+      </div>
       <div className="slogan">A trivia game</div>
       <div className="selections">
         <select onChange={categoryOnChanged}>

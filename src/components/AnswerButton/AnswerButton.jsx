@@ -4,8 +4,12 @@ import PropTypes from 'prop-types';
 import './AnswerButton.scss';
 
 const AnswerButton = ({ children, choice, onClick }) => {
+  const onClicked = () => {
+    onClick(children);
+  };
+
   return (
-    <button data-answer={children} onClick={onClick} type="button" className="answer-button">
+    <button onClick={onClicked} type="button" className="answer-button">
       <div className="choice">{choice}</div>
       <div className="text" dangerouslySetInnerHTML={{ __html: children }} />
     </button>

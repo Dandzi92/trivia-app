@@ -29,7 +29,7 @@ export const generateQuestions = (category, difficulty) => dispatch => {
       if (response.data.response_code === 0) {
         dispatch(fetchQuestionsLoaded(response.data));
       } else {
-        dispatch(fetchQuestionsError(response.data.Error));
+        dispatch(fetchQuestionsError('Question not found!'));
       }
     })
     .catch(error => {
