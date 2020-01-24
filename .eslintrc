@@ -26,7 +26,8 @@
             "error"
         ],
         "react/prop-types": 0,
-        "import/no-unresolved": "off"
+        "import/no-unresolved": "off",
+        "jsx-a11y/no-onchange": "off"
     },
     "globals": {
         "fetch": false

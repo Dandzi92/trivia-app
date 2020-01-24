@@ -18,10 +18,13 @@ export const fetchQuestionsError = error => ({
   error,
 });
 
-export const generateQuestions = difficulty => dispatch => {
+export const generateQuestions = (category, difficulty) => dispatch => {
   dispatch(fetchQuestionsStarted());
+  let URL = '/api.php?amount=10&type=multiple';
+  URL = category !== 'any' ? `${URL}&category=${category}` : URL;
+  URL = difficulty !== 'any' ? `${URL}&difficulty=${difficulty}` : URL;
   http
-    .get(`/api.php?amount=10&category=9&difficulty=${difficulty}&type=multiple`)
+    .get(URL)
     .then(response => {
       if (response.data.response_code === 0) {
         dispatch(fetchQuestionsLoaded(response.data));
@@ -34,8 +37,9 @@ export const generateQuestions = difficulty => dispatch => {
     });
 };
 
-export const questionAnsweredCorrectly = () => ({
+export const questionAnsweredCorrectly = point => ({
   type: 'QUESTION_ANSWERED_CORRECTLY',
+  point,
 });
 
 export const questionChanged = () => ({

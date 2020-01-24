@@ -42,11 +42,13 @@ class Question extends Component {
 
   onClick = event => {
     const { dispatch, question, history } = this.props;
+    const { remainingTime } = this.state;
     const { currentQuestion } = question;
     const correctAnswer = currentQuestion.correct_answer.toString();
     const userAnswer = event.target.dataset.answer;
     if (userAnswer === correctAnswer) {
-      dispatch(questionAnsweredCorrectly());
+      const earnedPoint = Math.round(100 / (15 / remainingTime));
+      dispatch(questionAnsweredCorrectly(earnedPoint));
       history.push('/success');
     } else {
       history.push('/wrong');

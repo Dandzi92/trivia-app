@@ -5,6 +5,7 @@ const defaultState = {
   questions: {},
   currentQuestion: {},
   points: 0,
+  lastEarnedPoint: 0,
 };
 
 const question = (state = defaultState, action) => {
@@ -34,7 +35,8 @@ const question = (state = defaultState, action) => {
     case 'QUESTION_ANSWERED_CORRECTLY':
       return {
         ...state,
-        points: state.points + 100,
+        points: state.points + action.point,
+        lastEarnedPoint: action.point,
       };
     case 'QUESTIONS_CHANGED':
       return {

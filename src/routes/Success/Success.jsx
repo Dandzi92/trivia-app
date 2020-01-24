@@ -26,7 +26,7 @@ const Success = ({ dispatch, question }) => {
         <div className="check-icon" />
         <div className="status">Correct</div>
         <div className="description">
-          <span>You have earned 100 points</span>
+          <span>You have earned {question.lastEarnedPoint} points</span>
           <span>Total: {question.points} points</span>
         </div>
         <Button onClick={onClick} variant="big">
