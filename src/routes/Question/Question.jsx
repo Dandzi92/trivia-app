@@ -1,5 +1,4 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { questionAnsweredCorrectly } from '../../store/actions';
 
@@ -11,24 +10,36 @@ import AnswerButton from '../../components/AnswerButton/AnswerButton';
 
 import './Question.scss';
 
-const Home = ({ dispatch, question }) => {
-  const history = useHistory();
-  if (question.fetching) {
-    return (
-      <div className="question-loading">
-        <Loading />
-      </div>
-    );
+class Question extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      answers: null,
+      remainingTime: 15,
+    };
   }
 
-  const { currentQuestion } = question;
-  const answers = [].concat(currentQuestion.incorrect_answers, currentQuestion.correct_answer);
-  // eslint-disable-next-line no-unused-vars
-  answers.sort((a, b) => 0.5 - Math.random());
-  const choices = ['a', 'b', 'c', 'd'];
-  console.log(currentQuestion.correct_answer);
+  componentDidMount() {
+    this.timer = setInterval(this.interval, 1000);
+  }
 
-  const onClick = event => {
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
+  interval = () => {
+    const { remainingTime } = this.state;
+    const { history } = this.props;
+    this.setState({ remainingTime: remainingTime - 1 });
+    if (remainingTime === 0) {
+      history.push('/wrong');
+    }
+  };
+
+  onClick = event => {
+    const { dispatch, question, history } = this.props;
+    const { currentQuestion } = question;
     const correctAnswer = currentQuestion.correct_answer.toString();
     const userAnswer = event.target.dataset.answer;
     if (userAnswer === correctAnswer) {
@@ -39,27 +50,60 @@ const Home = ({ dispatch, question }) => {
     }
   };
 
-  return (
-    <div className="question">
-      <QuestionStatusCard
-        points={question.points}
-        questionCount={question.questionCount}
-        questionIndex={question.currentIndex}
-      />
-      <Content>
-        <QuestionText>{currentQuestion.question}</QuestionText>
-        {answers.map((answer, i) => {
-          return (
-            // eslint-disable-next-line react/no-array-index-key
-            <AnswerButton data-answer={answers} onClick={onClick} key={i} choice={choices[i]}>
-              {answer}
-            </AnswerButton>
-          );
-        })}
-      </Content>
-    </div>
-  );
-};
+  render() {
+    const { question } = this.props;
+    const { answers, remainingTime } = this.state;
+    const { currentQuestion } = question;
+    const choices = ['a', 'b', 'c', 'd'];
+
+    if (question.fetching) {
+      return (
+        <div className="question-loading">
+          <Loading />
+        </div>
+      );
+    }
+
+    if (!answers) {
+      const answersArray = [].concat(
+        currentQuestion.incorrect_answers,
+        currentQuestion.correct_answer,
+      );
+      // eslint-disable-next-line no-unused-vars
+      answersArray.sort((a, b) => 0.5 - Math.random());
+      this.setState({ answers: answersArray });
+      console.log(currentQuestion.correct_answer);
+    }
+
+    return (
+      <div className="question">
+        <QuestionStatusCard
+          points={question.points}
+          questionCount={question.questionCount}
+          questionIndex={question.currentIndex}
+          remainingTime={remainingTime}
+        />
+        <Content>
+          <QuestionText>{currentQuestion.question}</QuestionText>
+          {answers &&
+            answers.map((answer, i) => {
+              return (
+                <AnswerButton
+                  data-answer={answers}
+                  onClick={this.onClick}
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={i}
+                  choice={choices[i]}
+                >
+                  {answer}
+                </AnswerButton>
+              );
+            })}
+        </Content>
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = state => {
   return {
@@ -67,4 +111,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(Question);

@@ -10,6 +10,7 @@
         "react",
         "jsx-a11y"
     ],
+    "parser": "babel-eslint",
     "rules": {
         "semi": 0,
         "react/jsx-filename-extension": [
