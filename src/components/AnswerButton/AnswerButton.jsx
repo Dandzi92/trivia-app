@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import './AnswerButton.scss';
 
-const AnswerButton = ({ children, choice }) => {
+const AnswerButton = ({ children, choice, onClick }) => {
   return (
-    <button type="button" className="answer-button">
+    <button data-answer={children} onClick={onClick} type="button" className="answer-button">
       <div className="choice">{choice}</div>
-      <div className="text">{children}</div>
+      <div className="text" dangerouslySetInnerHTML={{ __html: children }} />
     </button>
   );
 };
