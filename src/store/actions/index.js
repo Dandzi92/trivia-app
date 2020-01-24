@@ -41,3 +41,7 @@ export const questionAnsweredCorrectly = () => ({
 export const questionChanged = () => ({
   type: 'QUESTIONS_CHANGED',
 });
+
+export const gameOver = () => ({
+  type: 'GAME_OVER',
+});

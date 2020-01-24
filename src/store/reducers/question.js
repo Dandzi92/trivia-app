@@ -22,6 +22,7 @@ const question = (state = defaultState, action) => {
         error: null,
         questions: action.questions,
         currentQuestion: action.questions.results[0],
+        questionCount: action.questions.results.length,
       };
     case 'FETCH_QUESTIONS_ERROR':
       return {
@@ -40,6 +41,10 @@ const question = (state = defaultState, action) => {
         ...state,
         currentIndex: state.currentIndex + 1,
         currentQuestion: state.questions.results[state.currentIndex + 1],
+      };
+    case 'GAME_OVER':
+      return {
+        ...defaultState,
       };
     default:
       return state;

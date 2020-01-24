@@ -8,7 +8,7 @@ const QuestionStatusCard = ({ questionCount, questionIndex, points, remainingTim
     <div className="question-status-card">
       <div className="wrapper">
         <div>Question</div>
-        <div>{`${questionIndex} / ${questionCount}`}</div>
+        <div>{`${questionIndex + 1} / ${questionCount}`}</div>
       </div>
       <div className="wrapper">
         <div>Points</div>
@@ -30,7 +30,7 @@ QuestionStatusCard.propTypes = {
 };
 
 QuestionStatusCard.defaultProps = {
-  questionCount: 0,
+  questionCount: 10,
   questionIndex: 0,
   points: 0,
   remainingTime: 0,

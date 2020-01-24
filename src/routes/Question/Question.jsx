@@ -33,16 +33,19 @@ const Home = ({ dispatch, question }) => {
     const userAnswer = event.target.dataset.answer;
     if (userAnswer === correctAnswer) {
       dispatch(questionAnsweredCorrectly());
-      console.log('doğru');
+      history.push('/success');
     } else {
-      console.log('yanlış');
+      history.push('/wrong');
     }
-    history.push('/success');
   };
 
   return (
     <div className="question">
-      <QuestionStatusCard />
+      <QuestionStatusCard
+        points={question.points}
+        questionCount={question.questionCount}
+        questionIndex={question.currentIndex}
+      />
       <Content>
         <QuestionText>{currentQuestion.question}</QuestionText>
         {answers.map((answer, i) => {
